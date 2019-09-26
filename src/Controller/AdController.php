@@ -7,6 +7,8 @@ use App\Entity\Image;
 use App\Form\AnnonceType;
 use App\Repository\AdRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +36,7 @@ class AdController extends AbstractController
     /**
      * Permet de créer une annonce
      * @Route("/ads/new", name="ads_create")
+     * @IsGranted("ROLE_USER")
      * @param Request $request
      * @param ObjectManager $manager
      * @return Response
@@ -74,6 +77,8 @@ class AdController extends AbstractController
     /**
      * Permet d'afficher le formulaire d'edition
      * @Route("/ads/{slug}/edit", name="ads_edit")
+     * @Security("is_granted('ROLE_USER') and user=== ad.getAuthor()",
+     *     message="Cette annonce vous appartient pas, vous ne pouvez pas la modifier ")
      * @param Request $request
      * @param ObjectManager $manager
      * @param Ad $ad
@@ -124,5 +129,21 @@ class AdController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de supprimer une annonce
+     * @Route("/ads/{slug}/delete", name="ads_delete")
+     * @Security("is_granted('ROLE_USER') and user == ad.getAuthor()",
+     *      message="Vous n'avaez pas le droit d'accéder à cette ressource")
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     * @return Response
+     */
+    public function delete(Ad $ad, ObjectManager $manager)
+    {
+        $manager->remove($ad);
+        $manager->flush();
+        $this->addFlash("success", "L'annonce <strong>{$ad->getTitle()}</strong>");
+        return $this->redirectToRoute('ads_index');
+    }
 
 }
