@@ -33,7 +33,8 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Date(message="Attention , la date de départ doit être au bon format !")
-     * @Assert\GreaterThan("today", message="La date d'arrivée doit être ultérieure à la date d'aujourdhui ")
+     * @Assert\GreaterThan("today", message="La date d'arrivée doit être ultérieure à la date d'aujourdhui ",
+     *     groups={"front"})
      */
     private $startDate;
 
@@ -62,6 +63,7 @@ class Booking
     /**
      * Callback appelé à chaque fois qu'on crée une reservation
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      */
     public function prePersist()
     {
@@ -123,6 +125,7 @@ class Booking
         $diff = $this->endDate->diff($this->startDate);
         return $diff->days;
     }
+
 
     public function getId(): ?int
     {

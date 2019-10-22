@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#    <title> Les Sejours - {% block title %} Mon Application Symfony  {% endblock %} </title>#}
+    {#    <title> Les Sejours - {% block title %} Mon Application Symfony  {% endblock %} </title>#}
     <title> Les Séjours - {% block title %} Mon Application Symfony  {% endblock %} </title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
@@ -13,21 +13,21 @@
     <link href="https://fonts.googleapis.com/css?family=Crete+Round&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-     {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}{% endblock %}
 </head>
 <body>
 
-    {% include'inc/header.html.twig' %}
- 
-    {% block body %}{% endblock %}
+{% include'admin/inc/header.html.twig' %}
 
-    {% include 'inc/footer.html.twig' %}
+{% block body %}{% endblock %}
 
-    <script src ="/js/jquery.min.js"></script>
-    <script src ="/js/popper.min.js"></script>
-    <script src ="/js/bootstrap.min.js"></script>
+{% include 'admin/inc/footer.html.twig' %}
 
-    {% block javascripts %}{% endblock %}
+<script src ="/js/jquery.min.js"></script>
+<script src ="/js/popper.min.js"></script>
+<script src ="/js/bootstrap.min.js"></script>
+
+{% block javascripts %}{% endblock %}
 
 </body>
 </html>
