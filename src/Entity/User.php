@@ -372,4 +372,15 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * On définie cette méthode pour afficher
+     * le nom de la des roles dans la liste déroulante
+     * du formulaire
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->userRoles;
+    }
 }

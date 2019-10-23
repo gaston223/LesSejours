@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Entity\Booking;
 use App\Form\AnnonceType;
 use App\Repository\AdRepository;
+use App\Service\PaginationService;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,14 +17,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminAdController extends AbstractController
 {
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      * @param AdRepository $adRepository
+     * @param int $page
+     * @param PaginationService $pagination
      * @return Response
      */
-    public function index(AdRepository $adRepository)
+    public function index(AdRepository $adRepository, $page, PaginationService $pagination)
     {
+
+        $pagination->setEntityClass(Ad::class)
+            ->setPage($page);
+
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $adRepository->findAll(),
+            'pagination'=>$pagination
         ]);
     }
 

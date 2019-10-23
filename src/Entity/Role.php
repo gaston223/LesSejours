@@ -50,6 +50,8 @@ class Role
         return $this;
     }
 
+
+
     /**
      * @return Collection|User[]
      */
@@ -74,5 +76,16 @@ class Role
         }
 
         return $this;
+    }
+
+    /**
+     * On définie cette méthode pour afficher
+     * le nom de la catégorie dans la liste déroulante
+     * du formulaire
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }
