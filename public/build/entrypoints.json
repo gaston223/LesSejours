@@ -1,0 +1,28 @@
+{
+  "entrypoints": {
+    "js/app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/annonce~js/app.js",
+        "/build/vendors~js/app.js",
+        "/build/js/app.js"
+      ]
+    },
+    "js/annonce": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors~js/annonce~js/app.js",
+        "/build/vendors~js/annonce.js",
+        "/build/js/annonce.js"
+      ]
+    },
+    "css/app": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/css/app.css"
+      ]
+    }
+  }
+}
